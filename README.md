@@ -3,23 +3,23 @@ TimeTo
 
 jQuery plugin - timer countdown digital clock
 
-# Examples
+## Examples
 
-## Countdown timer
+### Countdown timer
 
-### Set delay in seconds
+#### Set delay in seconds
 
 ```javascript
 $('#countdown').timeTo(100, function(){ alert('Countdown finished'); });
 ```
 
-### Set delay to specyfied datetime
+#### Set delay to specyfied datetime
 
 ```javascript
 $('#countdown').timeTo(new Date('Dec 10 2013 00:00:00 GMT+0200 (EET)'));
 ```
 
-### Set captions and dark theme
+#### Set captions and dark theme
 
 ```javascript
 $('#countdown').timeTo({
@@ -29,13 +29,13 @@ $('#countdown').timeTo({
 });
 ```
 
-## Digital clock
+### Digital clock
 
 ```javascript
 $('#clock-1').timeTo();
 ```
 
-# Usage
+## Usage
 
 ```javascript
 $(<selection>).timeTo([options]);
