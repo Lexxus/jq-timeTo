@@ -65,3 +65,8 @@
 	position: absolute;
 	left: 3px;
 }
+
+.timeTo ul li {
+    margin: 0;
+    padding: 0;
+}
