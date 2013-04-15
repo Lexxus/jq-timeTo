@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>&laquo;TimeTo&raquo; jQuery plug-in example</title>
+
+    <link href="timeTo.css" type="text/css" rel="stylesheet"/>
+
+    <style>
+        pre {
+            margin-bottom: 10px;
+            padding-left: 10px;
+            border-left: 3px #DDD solid;
+        }
+    </style>
+</head>
+<body>
+    <h1>&laquo;TimeTo&raquo; jQuery plugin demo</h1>
+
+    <h2>Countdown timer</h2>
+
+    <h3>Set delay in seconds</h3>
+    <pre>
+$('#countdown').timeTo(100, function(){ alert('Countdown finished'); }); </pre>
+
+    <div id="countdown-1"></div>
+
+    <h3>Set delay to specyfied datetime</h3>
+    <pre>
+$('#countdown').timeTo(new Date('<span id="date-str"></span>')); </pre>
+
+    <div id="countdown-2"></div>
+
+    <h3>Set captions and dark theme</h1>
+    <pre>
+$('#countdown').timeTo({
+    timeTo: new Date(new Date('<span id="date2-str"></span>')),
+    theme: "black",
+    displayCaptions: true
+}); </pre>
+
+    <div id="countdown-3"></div>
+
+    <div>&nbsp;</div>
+    <h2>Digital clock</h2>
+    <pre>
+$('#clock-1').timeTo();</pre>
+
+    <div id="clock-1"></div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="jquery-1.9.1.min.js"><\/script>')</script>
+    <script src="jquery.timeTo.js"></script>
+    <script>
+        /***
+         * Set timer countdown in seconds with callback
+         */
+        $('#countdown-1').timeTo(100, function(){
+            alert('Coubtdown finished');
+        });
+
+        var date = getRelativeDate(20);
+
+        document.getElementById('date-str').innerHTML = date.toString();
+
+        /**
+         * Set timer countdown to specyfied date
+         */
+        $('#countdown-2').timeTo(date);
+
+        date = getRelativeDate(7, 9);
+        document.getElementById('date2-str').innerHTML = date.toString();
+
+        /**
+         * Set theme and captions
+         */
+        $('#countdown-3').timeTo({
+            timeTo: date,
+            theme: "black",
+            displayCaptions: true
+        });
+
+        /**
+         * Simple digital clock
+         */
+        $('#clock-1').timeTo();
+
+        function getRelativeDate(days, hours, minutes){
+            var date = new Date(Date.now() + 60000 /* milisec */ * 60 /* minutes */ * 24 /* hours */ * days /* days */);
+
+            date.setHours(hours || 0);
+            date.setMinutes(minutes || 0);
+            date.setSeconds(0);
+
+            return date;
+        }
+    </script>
+</body>
+</html>
