@@ -16,7 +16,7 @@ $('#countdown').timeTo(100, function(){ alert('Countdown finished'); });
 ### Set delay to specyfied datetime
 
 ```javascript
-$('#countdown').timeTo(new Date('Dec 10 2013 00:00:00 GMT+0200 (EET)')); </pre>
+$('#countdown').timeTo(new Date('Dec 10 2013 00:00:00 GMT+0200 (EET)'));
 ```
 
 ### Set captions and dark theme
@@ -35,9 +35,8 @@ $('#countdown').timeTo({
 $('#clock-1').timeTo();
 ```
 
-# Reference
+# Usage
 
-Usage is simple:
 ```javascript
 $(<selection>).timeTo([options]);
 ```
@@ -53,7 +52,7 @@ Object with initial settings:
 * **countdownAlertLimit**: *integer* seconds left to countdown end after that clock apply CSS class *timeTo-alert*, default **10**;
 * **displayDays**: *boolean* if true then section days is display, default **false**;
 * **displayCaption**: *boolean* if true then captions display, default **false**;
-* **lang**: *string* language for caption, available 'en', 'ru', 'ua', 'de', 'fr', 'sp', default '**en**';
+* **lang**: *string* language for caption, available 'en', 'ru', 'ua', 'de', 'fr', 'sp', default **'en'**;
 * **seconds**: *integer* initial time in seconds for countdown timer, default **0**;
 * **start**: *boolean* if true - start timer automaticaly, else need execute .timeTo("start"), default **true**;
 * **timeTo**: *date object* specify date and time for current time or for countdown to, default null.
@@ -79,4 +78,4 @@ $('#clock').timeTo({
 ```
 
 ### String
-Action for execute. Available: '**start**', '**stop**', '**reset**'.
+Action for execute. Available: **'start'**, **'stop'**, **'reset'**.
