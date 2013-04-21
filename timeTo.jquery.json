@@ -1,0 +1,26 @@
+{
+    "name": "timeTo",
+    "title": "TimeTo",
+    "description": "Timer countdown digital clock",
+    "keywords": [
+        "timer",
+        "countdown",
+        "clock",
+	"ui"
+    ],
+    "version": "1.0.0",
+    "author": {
+        "name": "Alexey Teterin"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://opensource.org/licenses/MIT"
+        }
+    ],
+    "homepage": "http://lexxus.github.io/jq-timeTo/",
+    "demo": "http://lexxus.github.io/jq-timeTo/",
+    "dependencies": {
+        "jquery": ">=1.4"
+    }
+}
