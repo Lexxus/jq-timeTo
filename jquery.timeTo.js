@@ -4,6 +4,8 @@
  *
  * @author Alexey Teterin <altmoc@gmail.com>
  * @version 1.0
+ * @license MIT http://opensource.org/licenses/MIT
+ * @date 2013-04-21
  */
 
 (function($){
