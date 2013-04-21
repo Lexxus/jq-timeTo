@@ -36,12 +36,14 @@ $('#countdown').timeTo(new Date('<span id="date-str"></span>')); </pre>
 $('#countdown').timeTo({
     timeTo: new Date(new Date('<span id="date2-str"></span>')),
     theme: "black",
-    displayCaptions: true
+    displayCaptions: true,
+    fontSize: 48,
+    captionSize: 14
 }); </pre>
 
     <div id="countdown-3"></div>
 
-    <div>&nbsp;</div>
+    <p>&nbsp;</p>
     <h2>Digital clock</h2>
     <pre>
 $('#clock-1').timeTo();</pre>
@@ -56,7 +58,7 @@ $('#clock-1').timeTo();</pre>
          * Set timer countdown in seconds with callback
          */
         $('#countdown-1').timeTo(100, function(){
-            alert('Coubtdown finished');
+            alert('Countdown finished');
         });
 
         var date = getRelativeDate(20);
@@ -77,7 +79,9 @@ $('#clock-1').timeTo();</pre>
         $('#countdown-3').timeTo({
             timeTo: date,
             theme: "black",
-            displayCaptions: true
+            displayCaptions: true,
+            fontSize: 48,
+            captionSize: 14
         });
 
         /**

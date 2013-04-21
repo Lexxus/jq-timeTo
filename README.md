@@ -48,14 +48,18 @@ where **options** can be...
 Object with initial settings:
 
 * **callback**:   *function* that call when countdown end, default **null**;
+* **captionSize**: *integer* font-size by pixels for captions, if 0 then calculate automaticaly, default **0**;
 * **countdown**:  *boolean* if false then it's as clock, default **true**;
 * **countdownAlertLimit**: *integer* seconds left to countdown end after that clock apply CSS class *timeTo-alert*, default **10**;
 * **displayDays**: *boolean* if true then section days is display, default **false**;
 * **displayCaption**: *boolean* if true then captions display, default **false**;
+* **fontFamily**: *string* font-family for digits, default **'Verdana, sans-serif'**;
+* **fontSize**: *integer* font-size by pixels for digits, default **28**;
 * **lang**: *string* language for caption, available 'en', 'ru', 'ua', 'de', 'fr', 'sp', default **'en'**;
 * **seconds**: *integer* initial time in seconds for countdown timer, default **0**;
 * **start**: *boolean* if true - start timer automaticaly, else need execute .timeTo("start"), default **true**;
-* **timeTo**: *date object* specify date and time for current time or for countdown to, default null.
+* **theme**: *string* nameof color theme, available "white" and "black", default **'white'**;
+* **timeTo**: *date object* specify date and time for current time or for countdown to, default **null**.
 
 ### Integer
 Initial setting for **seconds** option
