@@ -3,6 +3,9 @@ TimeTo
 
 jQuery plugin - timer countdown digital clock
 
+## Demo
+http://lexxus.github.io/jq-timeTo/
+
 ## Examples
 
 ### Countdown timer
