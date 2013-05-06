@@ -6,9 +6,9 @@
         "timer",
         "countdown",
         "clock",
-	"ui"
+        "ui"
     ],
-    "version": "1.0.1",
+    "version": "1.0.2",
     "author": {
         "name": "Alexey Teterin"
     },
@@ -20,6 +20,8 @@
     ],
     "homepage": "http://lexxus.github.io/jq-timeTo/",
     "demo": "http://lexxus.github.io/jq-timeTo/",
+    "docs": "http://lexxus.github.io/jq-timeTo/",
+    "download": "https://github.com/Lexxus/jq-timeTo/zipball/master",
     "dependencies": {
         "jquery": ">=1.4"
     }

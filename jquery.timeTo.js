@@ -1,11 +1,11 @@
 /**
- * QTimer jQuery plug-in
+ * TimeTo jQuery plug-in
  * Show countdown timer or realtime clock
  *
  * @author Alexey Teterin <altmoc@gmail.com>
- * @version 1.0
+ * @version 1.0.2
  * @license MIT http://opensource.org/licenses/MIT
- * @date 2013-04-21
+ * @date 2013-05-06
  */
 
 (function($){
@@ -13,8 +13,10 @@
         start: function(sec){
 			if(sec) init.call(this, sec);
 			var me = this,
-			    intervalId = setInterval(function(){ tick.call(me); }, 1000);
+			    intervalId = setTimeout(function(){ tick.call(me); }, 1000);
 
+            // save start time
+            this.data('ttStartTime', Date.now());
 			this.data('intervalId', intervalId);
 		},
 
@@ -22,7 +24,7 @@
 			var data = this.data();
 
 			if(data.intervalId){
-				clearInterval(data.intervalId);
+				clearTimeout(data.intervalId);
 				this.data('intervalId', null);
 			}
 			return data;
@@ -65,9 +67,10 @@
                 
                 vals: [0, 0, 0, 0, 0, 0, 0, 0, 0],	// private, current value of each digit
                 limits: [9, 9, 9, 2, 9, 5, 9, 5, 9],// private, max value of each digit
-                iSec: 8,		// private, index of second digit
-                iHour: 4,		// private, index of hour digit
-                intervalId:null	// private
+                iSec: 8,		    // private, index of second digit
+                iHour: 4,		    // private, index of hour digit
+                tickTimeout: 1000,  // timeout betweet each timer tick in miliseconds
+                intervalId:null	    // private
             },
             method, options = {};
 
@@ -215,7 +218,7 @@
         var isInterval = false;
         if (data.intervalId) {
             isInterval = true;
-            clearInterval(data.intervalId);
+            clearTimeout(data.intervalId);
         }
 
         var days = Math.floor(sec / 86400),
@@ -238,7 +241,8 @@
         }
         if (isInterval) {
             var me = this;
-            data.intervalId = setInterval(function(){ methods.tick.call(me); }, 1000);
+            data.ttStartTime = Date.now();
+            data.intervalId = setTimeout(function(){ tick.call(me); }, 1000);
             this.data('intervalId', data.intervalId);
         }
     }
@@ -253,7 +257,7 @@
 
         if (!data.vals || $digits.length == 0){
             if(data.intervalId){
-                clearInterval(data.intervalId);
+                clearTimeout(data.intervalId);
                 this.data('intervalId', null);
             }
             if(data.callback) data.callback();
@@ -272,7 +276,16 @@
         $li.eq(1).html(n);
         n += step;
 
-        if(digit == data.iSec) data.sec += step;
+        if(digit == data.iSec){
+            var tickTimeout = data.tickTimeout,
+                timeDiff = Date.now() - data.ttStartTime;
+
+            data.sec += step;
+
+            tickTimeout += Math.abs(data.seconds - data.sec) * tickTimeout - timeDiff;
+
+            data.intervalId = setTimeout(function(){ tick.call(me); }, tickTimeout);
+        }
         
         if(n < 0 || n > data.limits[digit]) {
             if(n < 0) n = data.limits[digit];
@@ -298,17 +311,18 @@
 
             if(data.sec == data.countdownAlertLimit){
                 $digits.parent().addClass('timeTo-alert');
-            }else if(data.sec == 0){
+            }
+            if(data.sec === 0){
                 $digits.parent().removeClass('timeTo-alert');
 
                 if(data.intervalId){
-                    clearInterval(data.intervalId);
+                    clearTimeout(data.intervalId);
                     me.data('intervalId', null);
                 }
 
                 if(typeof data.callback === 'function') data.callback();
             }
-        }, 500);
+        }, 410);
         /*$ul.stop().animate({top:0}, 400, digit != data.iSec ? null : function(){
             if(data.step > 0) return;
 
