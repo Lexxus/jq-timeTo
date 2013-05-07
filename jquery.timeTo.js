@@ -47,7 +47,8 @@
 		ua:{days:"днiв", hours:"годин", min:"хвилин", sec:"секунд"},
 		de:{days:"Tag", hours:"Uhr", min:"Minuten", sec:"Secunden"},
 		fr:{days:"jours", hours:"heures", min:"minutes", sec:"secondes"},
-		sp:{days:"días", hours:"reloj", min:"minutos", sec:"segundos"}
+		sp:{days:"días", hours:"reloj", min:"minutos", sec:"segundos"},
+		it:{days:"giorni", hours:"ore", min:"minuti", sec:"secondi"}
 	};
 	
 	$.fn.timeTo = function(){
