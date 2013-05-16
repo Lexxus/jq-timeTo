@@ -1,3 +1,7 @@
+figure, figcaption {
+	display: block;
+}
+
 .transition {
     -webkit-transition: top 400ms linear;
     -moz-transition: top 400ms linear;

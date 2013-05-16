@@ -16,7 +16,7 @@
 			    intervalId = setTimeout(function(){ tick.call(me); }, 1000);
 
             // save start time
-            this.data('ttStartTime', Date.now());
+			this.data('ttStartTime', (new Date()).getTime());
 			this.data('intervalId', intervalId);
 		},
 
@@ -50,6 +50,16 @@
 		sp:{days:"días", hours:"reloj", min:"minutos", sec:"segundos"},
 		it:{days:"giorni", hours:"ore", min:"minuti", sec:"secondi"}
 	};
+	
+	if(typeof $.support.transition === 'undefined'){
+		$.support.transition = (function(){
+			var thisBody = document.body || document.documentElement,
+				thisStyle = thisBody.style,
+				support = thisStyle.transition !== undefined || thisStyle.WebkitTransition !== undefined || thisStyle.MozTransition !== undefined || thisStyle.MsTransition !== undefined || thisStyle.OTransition !== undefined;
+
+			return support;
+		})();
+	}
 	
 	$.fn.timeTo = function(){
 		var defaults = {
@@ -99,15 +109,16 @@
 		}
         // set time for countdown to
 		if(options.timeTo){
-			var time;
+			var time,
+				now = (new Date()).getTime();
 
 			if(options.timeTo.getTime){ // set time as date object
 				time = options.timeTo.getTime();
 			}else if(typeof options.timeTo === 'number'){  // set time as integer in milisec
 				time = options.timeTo;
 			}
-            if(options.timeTo > Date.now()){
-                options.seconds = Math.floor((time - Date.now()) / 1000);
+            if(options.timeTo > now){
+                options.seconds = Math.floor((time - now) / 1000);
             }
 		}else if(options.time || !options.seconds){
             var time = options.time;
@@ -279,7 +290,7 @@
 
         if(digit == data.iSec){
             var tickTimeout = data.tickTimeout,
-                timeDiff = Date.now() - data.ttStartTime;
+                timeDiff = (new Date()).getTime() - data.ttStartTime;
 
             data.sec += step;
 
@@ -300,46 +311,52 @@
         $li.eq(0).html(n);
         
         var me = this;
-        $ul.addClass('transition');
-        $ul.css({top:0});
+		
+		if($.support.transition){
+			$ul.addClass('transition');
+			$ul.css({top:0});
 
-        setTimeout(function(){
-            $ul.removeClass('transition');
-            $li.eq(1).html(n);
-            $ul.css({top:"-"+ data.height +"px"});
+			setTimeout(function(){
+				$ul.removeClass('transition');
+				$li.eq(1).html(n);
+				$ul.css({top:"-"+ data.height +"px"});
 
-            if(step > 0 || digit != data.iSec) return;
+				if(step > 0 || digit != data.iSec) return;
 
-            if(data.sec == data.countdownAlertLimit){
-                $digits.parent().addClass('timeTo-alert');
-            }
-            if(data.sec === 0){
-                $digits.parent().removeClass('timeTo-alert');
+				if(data.sec == data.countdownAlertLimit){
+					$digits.parent().addClass('timeTo-alert');
+				}
+				if(data.sec === 0){
+					$digits.parent().removeClass('timeTo-alert');
 
-                if(data.intervalId){
-                    clearTimeout(data.intervalId);
-                    me.data('intervalId', null);
-                }
+					if(data.intervalId){
+						clearTimeout(data.intervalId);
+						me.data('intervalId', null);
+					}
 
-                if(typeof data.callback === 'function') data.callback();
-            }
-        }, 410);
-        /*$ul.stop().animate({top:0}, 400, digit != data.iSec ? null : function(){
-            if(data.step > 0) return;
+					if(typeof data.callback === 'function') data.callback();
+				}
+			}, 410);
+		}else{
+			$ul.stop().animate({top:0}, 400, digit != data.iSec ? null : function(){
+				$li.eq(1).html(n);
+				$ul.css({top:"-"+ data.height +"px"});
+				if(step > 0 || digit != data.iSec) return;
 
-            if(data.sec == data.countdownAlertLimit){
-                $digits.slice($digits.length - 2).parent().addClass('timeTo-alert');
-            }else if(data.sec == 0){
-                $digits.slice($digits.length - 2).parent().removeClass('timeTo-alert');
+				if(data.sec == data.countdownAlertLimit){
+					$digits.parent().addClass('timeTo-alert');
+				}else if(data.sec == 0){
+					$digits.parent().removeClass('timeTo-alert');
 
-                if(data.intervalId){
-                    clearInterval(data.intervalId);
-                    me.data('intervalId', null);
-                }
+					if(data.intervalId){
+						clearTimeout(data.intervalId);
+						me.data('intervalId', null);
+					}
 
-                if(typeof data.callback === 'function') data.callback();
-            }
-        });*/
+					if(typeof data.callback === 'function') data.callback();
+				}
+			});
+		}
         data.vals[digit] = n;
         //this.data('vals', data.vals);
     }

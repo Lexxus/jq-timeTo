@@ -4,7 +4,13 @@
     <meta charset="utf-8"/>
     <title>&laquo;TimeTo&raquo; jQuery plug-in example</title>
 
-    <link href="timeTo.css" type="text/css" rel="stylesheet"/>
+    <!--[if lt IE 9]>
+	<script>
+		document.createElement('figure');
+		document.createElement('figcaption');
+	</script>
+	<![endif]-->
+	<link href="timeTo.css" type="text/css" rel="stylesheet"/>
 
     <style>
         pre {
@@ -90,7 +96,7 @@ $('#clock-1').timeTo();</pre>
         $('#clock-1').timeTo();
 
         function getRelativeDate(days, hours, minutes){
-            var date = new Date(Date.now() + 60000 /* milisec */ * 60 /* minutes */ * 24 /* hours */ * days /* days */);
+            var date = new Date((new Date()).getTime() + 60000 /* milisec */ * 60 /* minutes */ * 24 /* hours */ * days /* days */);
 
             date.setHours(hours || 0);
             date.setMinutes(minutes || 0);
