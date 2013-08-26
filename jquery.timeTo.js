@@ -68,7 +68,7 @@
                 countdown: true,         // is countdown or real clock
                 countdownAlertLimit: 10, // limit in seconds when display red background
                 displayCaptions: false,  // display captions under digit groups
-                displayDays: false,      // display day timer
+                displayDays: 0,          // display day timer, count of days digits
                 fontFamily: "Verdana, sans-serif",
                 fontSize: 28,            // font-size of a digit by pixels
                 lang: 'en',              // language of caption
@@ -140,12 +140,20 @@
                 options.countdown = false;
             }
         }
-        if(options.countdown !== false && options.seconds > 86400) options.displayDays = true;
+        if(options.countdown !== false && options.seconds > 86400 && typeof options.displayDays === 'undefined') {
+            var days = Math.floor(options.seconds / 86400);
+            options.displayDays = days < 10 && 1 || days < 100 && 2 || 3;
+        }else if(options.displayDays === true) {
+            options.displayDays = 3;
+        }else if(options.displayDays) {
+            options.displayDays = options.displayDays > 0 ? Math.floor(options.displayDays) : 3;
+        }
 
 		
 		return this.each(function(){
 			var $this = $(this),
-                data = $this.data();
+                data = $this.data(),
+                i;
 
 			if(!data.vals){ // new clock
 				data = $.extend(defaults, options);
@@ -165,8 +173,8 @@
                     dhtml1 = '<div class="first"'+ style +'>'+ ulhtml,
                     dhtml2 = '<div'+ style +'>'+ ulhtml,
                     dot2 = '<span>:</span>',
-                    maxWidth = Math.round(data.width*2 + 3),
-                    captionSize = data.captionSize || Math.round(data.fontSize*.43);
+                    maxWidth = Math.round(data.width * 2 + 3),
+                    captionSize = data.captionSize || Math.round(data.fontSize * 0.43);
                     thtml = (data.displayCaptions ?
 						'<figure style="max-width:'+ maxWidth +'px">$1<figcaption style="font-size:'+ captionSize +'px">'+ dictionary[data.lang].hours +'</figcaption></figure>'+ dot2 +
 						'<figure style="max-width:'+ maxWidth +'px">$1<figcaption style="font-size:'+ captionSize +'px">'+ dictionary[data.lang].min +'</figcaption></figure>'+ dot2 +
@@ -174,12 +182,16 @@
 						: '$1'+ dot2 +'$1'+ dot2 +'$1'
 					).replace(/\$1/g, dhtml1 + dhtml2);
 
-				if(data.displayDays){
-                    var marginRight = data.fontSize*.4;
+				if(data.displayDays > 0){
+                    var marginRight = data.fontSize * 0.4,
+                        dhtml = dhtml1;
+                    for(i = data.displayDays - 1; i > 0; i--) {
+                        dhtml += i === 1 ? dhtml2.replace('">', ' margin-right:'+ Math.round(marginRight) +'px">') : dhtml2;
+                    }
 					thtml = (data.displayCaptions ?
-						'<figure style="width:'+ Math.round(data.width*3 + marginRight) +'px">$1<figcaption style="font-size:'+ captionSize +'px; padding-right:'+ Math.round(marginRight) +'px">'+ dictionary[data.lang].days +'</figcaption></figure>'
+						'<figure style="width:'+ Math.round(data.width*data.displayDays + marginRight + 4) +'px">$1<figcaption style="font-size:'+ captionSize +'px; padding-right:'+ Math.round(marginRight) +'px">'+ dictionary[data.lang].days +'</figcaption></figure>'
 						: '$1').replace(
-							/\$1/, dhtml1 + dhtml2 + (data.displayCaptions ? dhtml2 : dhtml2.replace('">', ' margin-right:'+ Math.round(marginRight) +'px">'))
+							/\$1/, dhtml
 						) + thtml;
 				}
 				$this.html(thtml);
@@ -199,7 +211,7 @@
 
 				data.vals = [];
 				data.limits = [];
-				for(var i = 0; i < $digits.length; i++){
+				for(i = 0; i < $digits.length; i++){
 					data.vals[i] = vals[dif + i];
 					data.limits[i] = limits[dif + i];
 				}
@@ -223,7 +235,7 @@
         var data = this.data(),
             $digits = this.find('ul');
 
-        if (!data.vals || $digits.length == 0) return;
+        if (!data.vals || $digits.length === 0) return;
 
         if(!sec) sec = data.seconds;
 

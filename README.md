@@ -54,7 +54,7 @@ Object with initial settings:
 * **captionSize**: *integer* font-size by pixels for captions, if 0 then calculate automaticaly, default **0**;
 * **countdown**:  *boolean* if false then it's as clock, default **true**;
 * **countdownAlertLimit**: *integer* seconds left to countdown end after that clock apply CSS class *timeTo-alert*, default **10**;
-* **displayDays**: *boolean* if true then section days is display, default **false**;
+* **displayDays**: *integer* count of digits days to display, default **auto** (for backward compatibility *true* means *3*);
 * **displayCaption**: *boolean* if true then captions display, default **false**;
 * **fontFamily**: *string* font-family for digits, default **'Verdana, sans-serif'**;
 * **fontSize**: *integer* font-size by pixels for digits, default **28**;
