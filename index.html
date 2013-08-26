@@ -59,6 +59,7 @@
 
 <div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#countdown'</span><span class="p">).</span><span class="nx">timeTo</span><span class="p">({</span>
     <span class="nx">timeTo</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="s1">'<span id="date2-str">Dec 10 2013 00:00:00 GMT+0200 (EET)</span>'</span><span class="p">)),</span>
+    <span class="nx">displayDays</span><span class="o">:</span> <span class="kc">2</span><span class="p">,</span>
     <span class="nx">theme</span><span class="o">:</span> <span class="s2">"black"</span><span class="p">,</span>
     <span class="nx">displayCaptions</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">fontSize</span><span class="o">:</span> <span class="kc">48</span><span class="p">,</span>
@@ -99,7 +100,7 @@
 <li>
 <strong>countdownAlertLimit</strong>: <em>integer</em> seconds left to countdown end after that clock apply CSS class <em>timeTo-alert</em>, default <strong>10</strong>;</li>
 <li>
-<strong>displayDays</strong>: <em>boolean</em> if true then section days is display, default <strong>false</strong>;</li>
+<strong>displayDays</strong>: <em>integer</em> count of digits days to display, default <strong>auto</strong> (for backward compatibility <em>true</em> means <em>3</em>);</li>
 <li>
 <strong>displayCaption</strong>: <em>boolean</em> if true then captions display, default <strong>false</strong>;</li>
 <li>
@@ -180,6 +181,7 @@
 */
         $('#countdown-3').timeTo({
             timeTo: date,
+            displayDays: 2,
             theme: "black",
             displayCaptions: true,
             fontSize: 48,
