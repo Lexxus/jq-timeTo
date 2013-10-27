@@ -16,6 +16,12 @@ http://lexxus.github.io/jq-timeTo/
 $('#countdown').timeTo(100, function(){ alert('Countdown finished'); });
 ```
 
+#### Hide hours
+
+```javascript
+$('#countdown').timeTo({ seconds: 100, displayHours: false });
+```
+
 #### Set delay to specyfied datetime
 
 ```javascript

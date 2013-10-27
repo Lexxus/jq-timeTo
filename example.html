@@ -31,6 +31,16 @@ $('#countdown').timeTo(100, function(){ alert('Countdown finished'); }); </pre>
 
     <div id="countdown-1"></div>
 
+    <h3>Hide hours</h3>
+    <pre>
+$('#countdown').timeTo({
+    seconds: 100,
+    displayHours: false
+}); </pre>
+
+    <div id="countdown-11"></div>
+
+
     <h3>Set delay to specyfied datetime</h3>
     <pre>
 $('#countdown').timeTo(new Date('<span id="date-str"></span>')); </pre>
@@ -61,11 +71,19 @@ $('#clock-1').timeTo();</pre>
     <script>window.jQuery || document.write('<script src="jquery-1.9.1.min.js"><\/script>')</script>
     <script src="jquery.timeTo.js"></script>
     <script>
-        /***
+        /**
          * Set timer countdown in seconds with callback
          */
         $('#countdown-1').timeTo(100, function(){
             alert('Countdown finished');
+        });
+
+        /**
+         * Hide hours
+         */
+        $('#countdown-11').timeTo({
+            seconds: 100,
+            displayHours: false
         });
 
         var date = getRelativeDate(20);
