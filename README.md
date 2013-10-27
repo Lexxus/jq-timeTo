@@ -62,6 +62,7 @@ Object with initial settings:
 * **countdownAlertLimit**: *integer* seconds left to countdown end after that clock apply CSS class *timeTo-alert*, default **10**;
 * **displayDays**: *integer* count of digits days to display, default **auto** (for backward compatibility *true* means *3*);
 * **displayCaption**: *boolean* if true then captions display, default **false**;
+* **displayHours**: *boolean* if false then hide hours, default **true**;
 * **fontFamily**: *string* font-family for digits, default **'Verdana, sans-serif'**;
 * **fontSize**: *integer* font-size by pixels for digits, default **28**;
 * **lang**: *string* language for caption, available 'en', 'ru', 'ua', 'de', 'fr', 'sp', 'it', default **'en'**;
