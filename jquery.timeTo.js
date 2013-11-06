@@ -7,8 +7,20 @@
  * @license MIT http://opensource.org/licenses/MIT
  * @date 2013-10-27
  */
+(function (factory) {
+    if (typeof exports === 'object') {
+        // CommonJS (Node)
+        var jQuery = require('jquery');
+        module.exports = factory(jQuery);
+    } else if (typeof define === 'function' && define.amd) {
+        // AMD
+        define(['jquery'], factory);
+    } else {
+        // globals
+        factory(jQuery);
+    }
+}(function ($) {
 
-(function($){
     var methods = {
         start: function(sec){
             if(sec) init.call(this, sec);
@@ -377,4 +389,7 @@
         data.vals[digit] = n;
         //this.data('vals', data.vals);
     }
-})(jQuery);
+
+    return jQuery;
+    
+}));
