@@ -19,7 +19,7 @@
         // globals
         factory(jQuery);
     }
-}(function ($) {
+}(function () {
 
     var methods = {
         start: function(sec){
