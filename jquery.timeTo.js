@@ -3,21 +3,21 @@
  * Show countdown timer or realtime clock
  *
  * @author Alexey Teterin <altmoc@gmail.com>
- * @version 1.0.8
+ * @version 1.0.9
  * @license MIT http://opensource.org/licenses/MIT
- * @date 2013-11-06
+ * @date 2013-12-07
  */
 (function (factory) {
     if (typeof exports === 'object') {
         // CommonJS (Node)
         var jQuery = require('jquery');
-        module.exports = factory(jQuery);
+        module.exports = factory(jQuery || $);
     } else if (typeof define === 'function' && define.amd) {
         // AMD
         define(['jquery'], factory);
     } else {
         // globals
-        factory(jQuery);
+        factory(jQuery || $);
     }
 }(function ($) {
 
@@ -128,7 +128,7 @@
 
             if(options.timeTo.getTime){ // set time as date object
                 time = options.timeTo.getTime();
-            }else if(typeof options.timeTo === 'number'){  // set time as integer in milisec
+            }else if(typeof options.timeTo === 'number'){  // set time as integer in millisec
                 time = options.timeTo;
             }
             if(options.timeTo > now){
