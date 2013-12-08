@@ -41,7 +41,7 @@
             }
             return data;
         },
-        
+
         reset: function(sec){
             var data = methods.stop.call(this);
 
@@ -52,7 +52,7 @@
         }
 
     };
-    
+
     var dictionary = {
         en:{days:"days", hours:"hours", min:"minutes", sec:"seconds"},
         ru:{days:"дней", hours:"часов", min:"минут", sec:"секунд"},
@@ -61,9 +61,10 @@
         fr:{days:"jours", hours:"heures", min:"minutes", sec:"secondes"},
         sp:{days:"días", hours:"reloj", min:"minutos", sec:"segundos"},
         it:{days:"giorni", hours:"ore", min:"minuti", sec:"secondi"},
-        nl:{days:"dagen", hours:"uren", min:"minuten", sec:"seconden"}
+        nl:{days:"dagen", hours:"uren", min:"minuten", sec:"seconden"},
+        no:{days:"dager", hours:"timer", min:"minutter", sec:"sekunder"}
     };
-    
+
     if(typeof $.support.transition === 'undefined'){
         $.support.transition = (function(){
             var thisBody = document.body || document.documentElement,
@@ -73,7 +74,7 @@
             return support;
         })();
     }
-    
+
     $.fn.timeTo = function(){
         var defaults = {
                 callback: null,          // callback function for exec when timer out
@@ -89,7 +90,7 @@
                 seconds: 0,              // timer's countdown value in seconds
                 start: true,             // true to start timer immediately
                 theme: "white",          // 'white' or 'black' theme fo timer's view
-                
+
                 vals: [0, 0, 0, 0, 0, 0, 0, 0, 0],  // private, current value of each digit
                 limits: [9, 9, 9, 2, 9, 5, 9, 5, 9],// private, max value of each digit
                 iSec: 8,            // private, index of second digit
@@ -163,7 +164,7 @@
             options.displayDays = options.displayDays > 0 ? Math.floor(options.displayDays) : 3;
         }
 
-        
+
         return this.each(function(){
             var $this = $(this),
                 data = $this.data(),
@@ -219,7 +220,7 @@
                 }
                 $.extend(data, options);
             }
-            
+
             var $digits = $this.find('div');
 
             if($digits.length < data.vals.length){
@@ -237,7 +238,7 @@
             }
             data.sec = data.seconds;
             $this.data(data);
-            
+
             if(method && methods[method]){
                 methods[ method ].call($this, data.seconds);
             }else if(data.start){
@@ -269,9 +270,9 @@
         rest += h * 3600;
 
         var m = Math.floor((sec - rest) / 60);
-        
+
         rest += m * 60;
-        
+
         var s = sec - rest,
             str = (days < 100 ? '0' + (days < 10 ? '0' : '') : '') + days + (h < 10 ? '0' : '') + h + (m < 10 ? '0' : '') + m + (s < 10 ? '0' : '') + s;
 
@@ -287,7 +288,7 @@
             this.data('intervalId', data.intervalId);
         }
     }
-        
+
     /**
      * Switch specified digit by digit index
      * @param {number} - digit index
@@ -327,7 +328,7 @@
 
             data.intervalId = setTimeout(function(){ tick.call(me); }, tickTimeout);
         }
-        
+
         if(n < 0 || n > data.limits[digit]) {
             if(n < 0) n = data.limits[digit];
             else n = 0;
@@ -338,9 +339,9 @@
         //$ul.removeClass('transition');
         //$ul.css({top:"-" + data.height + "px"});
         $li.eq(0).html(n);
-        
+
         var me = this;
-        
+
         if($.support.transition){
             $ul.addClass('transition');
             $ul.css({top:0});
@@ -391,5 +392,5 @@
     }
 
     return jQuery;
-    
+
 }));
