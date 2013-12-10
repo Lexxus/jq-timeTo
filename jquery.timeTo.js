@@ -3,9 +3,9 @@
  * Show countdown timer or realtime clock
  *
  * @author Alexey Teterin <altmoc@gmail.com>
- * @version 1.0.9
+ * @version 1.0.10
  * @license MIT http://opensource.org/licenses/MIT
- * @date 2013-12-07
+ * @date 2013-12-10
  */
 (function (factory) {
     if (typeof exports === 'object') {
