@@ -61,7 +61,8 @@
         fr:{days:"jours", hours:"heures", min:"minutes", sec:"secondes"},
         sp:{days:"días", hours:"reloj", min:"minutos", sec:"segundos"},
         it:{days:"giorni", hours:"ore", min:"minuti", sec:"secondi"},
-        nl:{days:"dagen", hours:"uren", min:"minuten", sec:"seconden"}
+        nl:{days:"dagen", hours:"uren", min:"minuten", sec:"seconden"},
+        no:{days:"dager", hours:"timer", min:"minutter", sec:"sekunder"}
     };
     
     if(typeof $.support.transition === 'undefined'){
