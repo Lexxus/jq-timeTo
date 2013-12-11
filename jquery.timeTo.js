@@ -244,7 +244,7 @@
             }else if(data.start){
                 methods.start.call($this, data.seconds);
             }else {
-                methods.init.call($this, data.seconds);
+                init.call($this, data.seconds);
             }
         });
     };
