@@ -46,6 +46,7 @@
             var data = methods.stop.call(this);
 
             this.find('div').css({ backgroundPosition: 'left center' });
+            this.find('ul').parent().removeClass('timeTo-alert');
 
             if(typeof sec === "undefined") sec = data.value;
             init.call(this, sec);
