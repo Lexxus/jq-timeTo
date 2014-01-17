@@ -331,8 +331,14 @@
         }
         
         if(n < 0 || n > data.limits[digit]) {
-            if(n < 0) n = data.limits[digit];
-            else n = 0;
+            if(n < 0)
+            {
+                n = data.limits[digit];
+                if(digit == data.iHour && data.displayDays > 0 && digit > 0 && data.vals[digit-1] == 0) // fix for hours when day changing
+                    n = 3;
+            }
+            else 
+                n = 0;
             if(digit > 0){
                 tick.call(this, digit-1);
             }
