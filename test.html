@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.1/jquery.mobile.min.css">
+    <link rel="stylesheet" href="http://lexxus.github.io/jq-timeTo/stylesheets/timeTo.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <script src="js/jquery.timeTo.min.js"></script>
+    <script>
+      var timeout = 60,
+      msgText = "Hello World",
+      popup;
+
+      $(function() {
+        var page = $('#page');
+        popup = $('<div data-role="popup" id="timeOutMessageBox" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all"></div>').appendTo( page );
+        var header = $('<div data-role="header" id="header_timeOutMessageBox" data-theme="a" class="ui-corner-top ui-header ui-bar-a" role="banner"><h1 class="ui-title" role="heading" aria-level="1">Timeout Warning</h1></div>').appendTo( popup );
+        var content = $('<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content"> \
+                        <h3 class="ui-title">'+msgText+'</h3> \
+                        <div id="countdown"></div> \
+                        <a id="timeOutMessageBoxResetButton" href="" data-role="button" data-inline="true" data-theme="c">OK</a> \
+                        </div>'
+                      ).appendTo( popup );
+        popup.popup();
+        $("#timeOutMessageBoxResetButton").button();
+      });
+
+      function showPopup() {
+        popup.popup("open");
+        popup.popup("option", "positionTo", "window" );
+        console.log("timout: "+timeout);
+        $('#countdown').timeTo();
+      }
+    </script>
+  </head>
+  <body>
+    <div id="page" data-role="page">
+      <div data-role="header"><h1>Header</h1></div>
+      <div role="main" class="ui-content"><p>Content</p><button type="button" onclick="showPopup()" class="ui-btn">Show Popup</button></div>
+      <div data-role="footer"><h4>Footer</h4></div>
+    </div>
+  </body>
+</html>
