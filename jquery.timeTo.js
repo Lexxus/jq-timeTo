@@ -95,7 +95,7 @@
                 theme: "white",          // 'white' or 'black' theme fo timer's view
                 
                 vals: [0, 0, 0, 0, 0, 0, 0, 0, 0],  // private, current value of each digit
-                limits: [9, 9, 9, 2, 9, 5, 9, 5, 9],// private, max value of each digit
+                limits: [9, 9, 9, 2, 4, 5, 9, 5, 9],// private, max value of each digit
                 iSec: 8,            // private, index of second digit
                 iHour: 4,           // private, index of hour digit
                 tickTimeout: 1000,  // timeout betweet each timer tick in miliseconds
