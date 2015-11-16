@@ -64,7 +64,7 @@ Object with initial settings:
 * **displayCaption**: *boolean* if true then captions display, default **false**;
 * **displayHours**: *boolean* if false then hide hours, default **true**;
 * **fontFamily**: *string* font-family for digits, default **'Verdana, sans-serif'**;
-* **fontSize**: *integer* font-size by pixels for digits, default **28**;
+* **fontSize**: *integer* font-size by pixels for digits, default **0** - use CSS instead;
 * **lang**: *string* language for caption, available 'en', 'ru', 'ua', 'de', 'fr', 'sp', 'it', 'nl', 'no', 'pt', default **'en'**;
 * **seconds**: *integer* initial time in seconds for countdown timer, default **0**;
 * **start**: *boolean* if true - start timer automaticaly, else need execute .timeTo("start"), default **true**;
