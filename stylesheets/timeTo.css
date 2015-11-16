@@ -79,8 +79,8 @@
 .timeTo div {
 	position: relative;
 	display: inline-block;
-	/*width: 25px;
-	height: 30px;*/
+	width: 25px;
+	height: 30px;
 	border-top: 1px solid silver;
 	border-right: 1px solid silver;
 	border-bottom: 1px solid silver;
