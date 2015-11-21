@@ -21,7 +21,7 @@
         // globals
         factory(jQuery || $);
     }
-}(function ($) {
+}(function () {
 
     var SECONDS_PER_DAY = 86400,
         SECONDS_PER_HOUR = 3600;
