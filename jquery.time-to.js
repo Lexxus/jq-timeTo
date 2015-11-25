@@ -1,5 +1,5 @@
 /**
- * TimeTo jQuery plug-in
+ * Time-To jQuery plug-in
  * Show countdown timer or realtime clock
  *
  * @author Alexey Teterin <altmoc@gmail.com>

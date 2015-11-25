@@ -1,0 +1,31 @@
+{
+  "name": "time-to",
+  "version": "1.1.1",
+  "description": "Countdown timer and digital clock",
+  "main": "jquery.timeTo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lexxus/jq-timeTo.git"
+  },
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery"
+  ],
+  "author": "Alexey Teterin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lexxus/jq-timeTo/issues"
+  },
+  "homepage": "http://lexxus.github.io/jq-timeTo/",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.1"
+  },
+  "dependencies": {
+    "jquery": "^2.1.4"
+  }
+}
