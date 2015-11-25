@@ -3,25 +3,25 @@
  * Show countdown timer or realtime clock
  *
  * @author Alexey Teterin <altmoc@gmail.com>
- * @version 1.1.0
+ * @version 1.1.1
  * @license MIT http://opensource.org/licenses/MIT
- * @date 2015-11-16
+ * @date 2015-11-25
  */
 'use strict';
 
-(function (factory) {
-    if (typeof exports === 'object') {
+(function(factory) {
+    if(typeof exports === 'object') {
         // CommonJS (Node)
         var jQuery = require('jquery');
         module.exports = factory(jQuery || $);
-    } else if (typeof define === 'function' && define.amd) {
+    } else if(typeof define === 'function' && define.amd) {
         // AMD (RequireJS)
         define(['jquery'], factory);
     } else {
         // globals
         factory(jQuery || $);
     }
-}(function ($) {
+}(function($) {
 
     var SECONDS_PER_DAY = 86400,
         SECONDS_PER_HOUR = 3600;
@@ -54,19 +54,23 @@
 
     var methods = {
         start: function(sec) {
-            if (sec) init.call(this, sec);
             var me = this,
+                intervalId;
+
+            if(sec) {
+                init.call(this, sec);
                 intervalId = setTimeout(function() { tick.call(me); }, 1000);
 
-            // save start time
-            this.data('ttStartTime', (new Date()).getTime());
-            this.data('intervalId', intervalId);
+                // save start time
+                this.data('ttStartTime', $.now());
+                this.data('intervalId', intervalId);
+            }
         },
 
         stop: function() {
             var data = this.data();
 
-            if (data.intervalId) {
+            if(data.intervalId) {
                 clearTimeout(data.intervalId);
                 this.data('intervalId', null);
             }
@@ -79,7 +83,9 @@
             this.find('div').css({ backgroundPosition: 'left center' });
             this.find('ul').parent().removeClass('timeTo-alert');
 
-            if (typeof sec === "undefined") { sec = data.value; }
+            if(typeof sec === 'undefined') {
+                sec = data.seconds;
+            }
             init.call(this, sec, true);
         }
     };
@@ -97,7 +103,7 @@
         pt:{days:'dias',   hours:'horas',  min:'minutos',  sec:'segundos'}
     };
     
-    if (typeof $.support.transition === 'undefined') {
+    if(typeof $.support.transition === 'undefined') {
         $.support.transition = (function() {
             var thisBody = document.body || document.documentElement,
                 thisStyle = thisBody.style,
@@ -115,13 +121,13 @@
         var tt, sec, m, t;
 
         for(i = 0; arg = arguments[i]; ++i) {
-            if (i == 0 && typeof arg === 'string') {
+            if(i == 0 && typeof arg === 'string') {
                 method = arg;
             }
             else {
-                if (typeof arg === 'object') {
+                if(typeof arg === 'object') {
                     // arg is a Date object
-                    if (typeof arg.getTime === 'function') {
+                    if(typeof arg.getTime === 'function') {
                         options.timeTo = arg;
                     }
                     else { // arg is an options object
@@ -130,13 +136,13 @@
                 }
                 else {
                     // arg is callback
-                    if (typeof arg === 'function') {
+                    if(typeof arg === 'function') {
                         options.callback = arg;
                     }
                     else {
                         num = parseInt(arg, 10);
                         // arg is seconds of timeout
-                        if (!isNaN(num)) {
+                        if(!isNaN(num)) {
                             options.seconds = num;
                         }
                     }
@@ -145,28 +151,31 @@
         }
 
         // set time to countdown to
-        if (options.timeTo) {
-            if (options.timeTo.getTime) { // set time as date object
+        if(options.timeTo) {
+            if(options.timeTo.getTime) { // set time as date object
                 time = options.timeTo.getTime();
             }
-            else if (typeof options.timeTo === 'number') {  // set time as integer in millisec
+            else if(typeof options.timeTo === 'number') {  // set time as integer in millisec
                 time = options.timeTo;
             }
-            if (options.timeTo > now) {
+            if(time > now) {
                 options.seconds = Math.floor((time - now) / 1000);
             }
-        } else if (options.time || !options.seconds) {
+            else {
+                options.seconds = 0;
+            }
+        } else if(options.time || !options.seconds) {
             time = options.time;
 
-            if (!time) {
+            if(!time) {
                 time = new Date();
             }
 
-            if (typeof time === 'object' && time.getTime) {
+            if(typeof time === 'object' && time.getTime) {
                 options.seconds = time.getHours()*SECONDS_PER_HOUR + time.getMinutes()*60 + time.getSeconds();
                 options.countdown = false;
             }
-            else if (typeof time === 'string') {
+            else if(typeof time === 'string') {
                 tt = time.split(':');
                 sec = 0;
                 m = 1;
@@ -180,14 +189,14 @@
             }
         }
 
-        if (options.countdown !== false && options.seconds > SECONDS_PER_DAY && typeof options.displayDays === 'undefined') {
+        if(options.countdown !== false && options.seconds > SECONDS_PER_DAY && typeof options.displayDays === 'undefined') {
             days = Math.floor(options.seconds / SECONDS_PER_DAY);
             options.displayDays = days < 10 && 1 || days < 100 && 2 || 3;
         }
-        else if (options.displayDays === true) {
+        else if(options.displayDays === true) {
             options.displayDays = 3;
         }
-        else if (options.displayDays) {
+        else if(options.displayDays) {
             options.displayDays = options.displayDays > 0 ? Math.floor(options.displayDays) : 3;
         }
 
@@ -196,13 +205,13 @@
                 data = $this.data(),
                 opt, defs = {}, i, css;
 
-            if (data.intervalId) {
+            if(data.intervalId) {
                 clearInterval(data.intervalId);
                 data.intervalId = null;
             }
 
-            if (!data.vals || method === 'reset') { // new clock
-                if (data.opt) {
+            if(!data.vals) { // new clock
+                if(data.opt) {
                     opt = data.options;
                 }
                 else {
@@ -211,7 +220,7 @@
 
                 // clone the defaults object
                 for(i in defaults) {
-                    if ($.isArray(defaults[i])) {
+                    if($.isArray(defaults[i])) {
                         defs[i] = defaults[i].slice(0);
                     }
                     else {
@@ -229,7 +238,7 @@
                 css = {
                     fontFamily: data.fontFamily
                 };
-                if (data.fontSize > 0) {
+                if(data.fontSize > 0) {
                     css.fontSize = data.fontSize +'px';
                 }
 
@@ -258,7 +267,7 @@
                         : (data.displayHours ? '$1'+ dot2 : '') +'$1'+ dot2 +'$1'
                     ).replace(/\$1/g, dhtml1 + dhtml2);
 
-                if (data.displayDays > 0) {
+                if(data.displayDays > 0) {
                     var marginRight = data.fontSize * 0.4 || defaults.gap,
                         dhtml = dhtml1;
                     for(i = data.displayDays - 1; i > 0; i--) {
@@ -274,13 +283,13 @@
                 }
                 $this.html(thtml);
             }
-            else { // exists clock
+            else if(method !== 'reset') { // exists clock
                 $.extend(data, options);
             }
             
             var $digits = $this.find('div');
 
-            if ($digits.length < data.vals.length) {
+            if($digits.length < data.vals.length) {
                 var dif = data.vals.length - $digits.length,
                     vals = data.vals, limits = data.limits;
 
@@ -296,10 +305,10 @@
             data.sec = data.seconds;
             $this.data(data);
             
-            if (method && methods[method]) {
+            if(method && methods[method]) {
                 methods[ method ].call($this, data.seconds);
             }
-            else if (data.start) {
+            else if(data.start) {
                 methods.start.call($this, data.seconds);
             }
             else {
@@ -314,24 +323,24 @@
             $digits = this.find('ul'),
             isInterval = false;
 
-        if (!data.vals || $digits.length === 0) {
+        if(!data.vals || $digits.length === 0) {
             return;
         }
 
-        if (!sec) {
+        if(!sec) {
             sec = data.seconds;
         }
 
-        if (data.intervalId) {
+        if(data.intervalId) {
             isInterval = true;
             clearTimeout(data.intervalId);
         }
 
-        var days = Math.floor(sec / 86400),
-            rest = days * 86400,
-            h = Math.floor((sec - rest) / 3600);
+        var days = Math.floor(sec / SECONDS_PER_DAY),
+            rest = days * SECONDS_PER_DAY,
+            h = Math.floor((sec - rest) / SECONDS_PER_HOUR);
 
-        rest += h * 3600;
+        rest += h * SECONDS_PER_HOUR;
 
         var m = Math.floor((sec - rest) / 60);
         
@@ -345,7 +354,7 @@
             data.vals[i] = v;
             $digits.eq(i).children().html(v);
         }
-        if (isInterval || force) {
+        if(isInterval || force) {
             var me = this;
             data.ttStartTime = $.now();
             data.intervalId = setTimeout(function() { tick.call(me); }, 1000);
@@ -361,18 +370,18 @@
         var $digits = this.find('ul'),
             data = this.data();
 
-        if (!data.vals || $digits.length == 0) {
-            if (data.intervalId) {
+        if(!data.vals || $digits.length == 0) {
+            if(data.intervalId) {
                 clearTimeout(data.intervalId);
                 this.data('intervalId', null);
             }
-            if (data.callback) {
+            if(data.callback) {
                 data.callback();
             }
 
             return;
         }
-        if (digit == undefined) {
+        if(digit == undefined) {
             digit = data.iSec;
         }
 
@@ -384,7 +393,7 @@
         $li.eq(1).html(n);
         n += step;
 
-        if (digit == data.iSec) {
+        if(digit == data.iSec) {
             var tickTimeout = data.tickTimeout,
                 timeDiff = $.now() - data.ttStartTime;
 
@@ -395,27 +404,25 @@
             data.intervalId = setTimeout(function() { tick.call(me); }, tickTimeout);
         }
         
-        if (n < 0 || n > data.limits[digit]) {
-            if (n < 0) {
+        if(n < 0 || n > data.limits[digit]) {
+            if(n < 0) {
                 n = data.limits[digit];
-                if (digit == data.iHour && data.displayDays > 0 && digit > 0 && data.vals[digit-1] == 0) // fix for hours when day changing
+                if(digit == data.iHour && data.displayDays > 0 && digit > 0 && data.vals[digit-1] == 0) // fix for hours when day changing
                     n = 3;
             }
             else {
                 n = 0;
             }
 
-            if (digit > 0) {
+            if(digit > 0) {
                 tick.call(this, digit-1);
             }
         }
-        //$ul.removeClass('transition');
-        //$ul.css({top:"-" + data.height + "px"});
         $li.eq(0).html(n);
         
         var me = this;
         
-        if ($.support.transition) {
+        if($.support.transition) {
             $ul.addClass('transition');
             $ul.css({top:0});
 
@@ -424,23 +431,23 @@
                 $li.eq(1).html(n);
                 $ul.css({top:"-"+ data.height +"px"});
 
-                if (step > 0 || digit != data.iSec) {
+                if(step > 0 || digit != data.iSec) {
                     return;
                 }
 
-                if (data.sec == data.countdownAlertLimit) {
+                if(data.sec == data.countdownAlertLimit) {
                     $digits.parent().addClass('timeTo-alert');
                 }
 
-                if (data.sec === 0) {
+                if(data.sec === 0) {
                     $digits.parent().removeClass('timeTo-alert');
 
-                    if (data.intervalId) {
+                    if(data.intervalId) {
                         clearTimeout(data.intervalId);
                         me.data('intervalId', null);
                     }
 
-                    if (typeof data.callback === 'function') {
+                    if(typeof data.callback === 'function') {
                         data.callback();
                     }
                 }
@@ -450,29 +457,28 @@
             $ul.stop().animate({top:0}, 400, digit != data.iSec ? null : function() {
                 $li.eq(1).html(n);
                 $ul.css({top:"-"+ data.height +"px"});
-                if (step > 0 || digit != data.iSec) {
+                if(step > 0 || digit != data.iSec) {
                     return;
                 }
 
-                if (data.sec == data.countdownAlertLimit) {
+                if(data.sec == data.countdownAlertLimit) {
                     $digits.parent().addClass('timeTo-alert');
                 }
-                else if (data.sec == 0) {
+                else if(data.sec == 0) {
                     $digits.parent().removeClass('timeTo-alert');
 
-                    if (data.intervalId) {
+                    if(data.intervalId) {
                         clearTimeout(data.intervalId);
                         me.data('intervalId', null);
                     }
 
-                    if (typeof data.callback === 'function') {
+                    if(typeof data.callback === 'function') {
                         data.callback();
                     }
                 }
             });
         }
         data.vals[digit] = n;
-        //this.data('vals', data.vals);
     }
 
     return jQuery;

@@ -27,7 +27,7 @@
 
     <h3>Set delay in seconds</h3>
     <pre>
-$('#countdown').timeTo(100, function(){ alert('Countdown finished'); }); </pre>
+$('#countdown').timeTo(120, function(){ alert('Countdown finished'); }); </pre>
 
     <div id="countdown-1"></div>
     <p><button id="reset-1" type="button">Reset</button></p>
@@ -78,14 +78,12 @@ $('#clock-1').timeTo();</pre>
         /**
          * Set timer countdown in seconds with callback
          */
-        $('#countdown-1').timeTo(1000, function(){
+        $('#countdown-1').timeTo(120, function(){
             alert('Countdown finished');
         });
         $('#reset-1').click(function() {
             $('#countdown-1').timeTo('reset');
         });
-
-        // $('.clock').timeTo();
 
         /**
          * Hide hours
