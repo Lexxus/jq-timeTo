@@ -3,9 +3,9 @@
  * Show countdown timer or realtime clock
  *
  * @author Alexey Teterin <altmoc@gmail.com>
- * @version 1.1.1
+ * @version 1.1.2
  * @license MIT http://opensource.org/licenses/MIT
- * @date 2015-11-25
+ * @date 2015-11-26
  */
 'use strict';
 
@@ -96,11 +96,12 @@
         ua:{days:'днiв',   hours:'годин',  min:'хвилин',   sec:'секунд'},
         de:{days:'Tag',    hours:'Uhr',    min:'Minuten',  sec:'Secunden'},
         fr:{days:'jours',  hours:'heures', min:'minutes',  sec:'secondes'},
-        sp:{days:'días',   hours:'reloj',  min:'minutos',  sec:'segundos'},
+        sp:{days:'días',   hours:'horas',  min:'minutos',  sec:'segundos'},
         it:{days:'giorni', hours:'ore',    min:'minuti',   sec:'secondi'},
         nl:{days:'dagen',  hours:'uren',   min:'minuten',  sec:'seconden'},
         no:{days:'dager',  hours:'timer',  min:'minutter', sec:'sekunder'},
-        pt:{days:'dias',   hours:'horas',  min:'minutos',  sec:'segundos'}
+        pt:{days:'dias',   hours:'horas',  min:'minutos',  sec:'segundos'},
+        tr:{days:'gün',    hours:'saat',   min:'dakika',   sec:'saniye'}
     };
     
     if(typeof $.support.transition === 'undefined') {
