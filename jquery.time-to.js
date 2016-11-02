@@ -52,14 +52,11 @@
 
     var methods = {
         start: function (sec) {
-            var me = this;
             var intervalId;
 
             if (sec) {
                 init.call(this, sec);
-                intervalId = setTimeout(function () {
-                    tick.call(me);
-                }, 1000);
+                intervalId = setTimeout(tick.bind(this), 1000);
 
                 // save start time
                 this.data('ttStartTime', $.now());
@@ -327,7 +324,6 @@
 
 
     function init(sec, force) {
-        var me = this;
         var data = this.data();
         var $digits = this.find('ul');
         var isInterval = false;
@@ -368,9 +364,7 @@
         }
         if (isInterval || force) {
             data.ttStartTime = $.now();
-            data.intervalId = setTimeout(function () {
-                tick.call(me);
-            }, 1000);
+            data.intervalId = setTimeout(tick.bind(this), 1000);
             this.data('intervalId', data.intervalId);
         }
     }
@@ -415,7 +409,7 @@
 
             tickTimeout += (Math.abs(data.seconds - data.sec) * tickTimeout) - timeDiff;
 
-            data.intervalId = setTimeout(function () { tick.call(me); }, tickTimeout);
+            data.intervalId = setTimeout(tick.bind(this), tickTimeout);
         }
 
         if (n < 0 || n > data.limits[digit]) {

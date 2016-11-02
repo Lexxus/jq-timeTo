@@ -20,7 +20,7 @@ gulp.task('lint', () => {
         .pipe(eslint.failAfterError());
 });
 
-gulp.task('build', function() {
+gulp.task('build', () => {
     return gulp.src('jquery.time-to.js')
         .pipe(uglify({
             preserveComments: 'license'
