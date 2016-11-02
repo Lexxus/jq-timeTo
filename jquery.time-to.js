@@ -37,6 +37,7 @@
         fontFamily: 'Verdana, sans-serif',
         fontSize: 0,             // font-size of a digit by pixels (0 - use CSS instead)
         lang: 'en',              // language of caption
+        languages: {},           // extra or overridden languages
         seconds: 0,              // timer's countdown value in seconds
         start: true,             // true to start timer immediately
         theme: 'white',          // 'white' or 'black' theme fo timer's view
@@ -242,6 +243,7 @@
                 if(data.fontSize > 0) {
                     css.fontSize = data.fontSize +'px';
                 }
+                var language = data.languages[data.lang] || dictionary[data.lang];
 
                 $this
                     .addClass('timeTo')
@@ -261,10 +263,10 @@
 
                     thtml = (data.displayCaptions ?
                         (data.displayHours
-                            ? '<figure style="max-width:'+ maxWidth +'px">$1<figcaption'+ fsStyle +'>'+ dictionary[data.lang].hours +'</figcaption></figure>'+ dot2
+                            ? '<figure style="max-width:'+ maxWidth +'px">$1<figcaption'+ fsStyle +'>'+ language.hours +'</figcaption></figure>'+ dot2
                             : '') +
-                        '<figure style="max-width:'+ maxWidth +'px">$1<figcaption'+ fsStyle +'>'+ dictionary[data.lang].min +'</figcaption></figure>'+ dot2 +
-                        '<figure style="max-width:'+ maxWidth +'px">$1<figcaption'+ fsStyle +'>'+ dictionary[data.lang].sec +'</figcaption></figure>'
+                        '<figure style="max-width:'+ maxWidth +'px">$1<figcaption'+ fsStyle +'>'+ language.min +'</figcaption></figure>'+ dot2 +
+                        '<figure style="max-width:'+ maxWidth +'px">$1<figcaption'+ fsStyle +'>'+ language.sec +'</figcaption></figure>'
                         : (data.displayHours ? '$1'+ dot2 : '') +'$1'+ dot2 +'$1'
                     ).replace(/\$1/g, dhtml1 + dhtml2);
 
@@ -277,7 +279,7 @@
                     thtml = (data.displayCaptions ?
                         '<figure style="width:'+ Math.round(data.width*data.displayDays + marginRight + 4) +'px">$1'
                             + '<figcaption style="'+ fsStyleVal +'padding-right:'+ Math.round(marginRight) +'px">'
-                            + dictionary[data.lang].days +'</figcaption></figure>'
+                            + language.days +'</figcaption></figure>'
                         : '$1').replace(
                             /\$1/, dhtml
                         ) + thtml;

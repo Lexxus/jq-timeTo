@@ -66,6 +66,7 @@ Object with initial settings:
 * **fontFamily**: *string* font-family for digits, default **'Verdana, sans-serif'**;
 * **fontSize**: *integer* font-size by pixels for digits, default **0** - use CSS instead;
 * **lang**: *string* language for caption, available 'en', 'ru', 'ua', 'de', 'fr', 'sp', 'it', 'nl', 'no', 'pt', default **'en'**;
+* **languages**: *object* extra languages or overrides, first level key is lang, second level keys: 'days', 'hours', 'min', 'sec', default **{}**;
 * **seconds**: *integer* initial time in seconds for countdown timer, default **0**;
 * **start**: *boolean* if true - start timer automaticaly, else need execute .timeTo("start"), default **true**;
 * **theme**: *string* nameof color theme, available "white" and "black", default **'white'**;
