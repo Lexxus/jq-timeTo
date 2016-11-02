@@ -1,9 +1,12 @@
 {
   "name": "time-to",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Countdown timer and digital clock",
-  "main": "jquery.timeTo.js",
+  "main": "jquery.time-to.js",
   "scripts": {
+    "start": "gulp",
+    "lint": "gulp lint",
+    "build": "gulp build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -12,7 +15,9 @@
   },
   "keywords": [
     "jquery-plugin",
-    "ecosystem:jquery"
+    "ecosystem:jquery",
+    "timer",
+    "clock"
   ],
   "author": "Alexey Teterin",
   "license": "MIT",
@@ -21,11 +26,45 @@
   },
   "homepage": "http://lexxus.github.io/jq-timeTo/",
   "devDependencies": {
+    "eslint-config-airbnb-base": "^9.0.0",
+    "eslint-plugin-import": "^2.0.1",
     "gulp": "^3.9.0",
+    "gulp-eslint": "^3.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.1"
   },
   "dependencies": {
     "jquery": "^2.1.4"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es6": false,
+      "jquery": true,
+      "node": false
+    },
+    "globals": {
+      "define": true,
+      "module": true,
+      "require": true,
+      "jQuery": true
+    },
+    "extends": "airbnb-base",
+    "rules": {
+      "comma-dangle": 0,
+      "func-names": 0,
+      "global-require": 0,
+      "indent": [2, 4],
+      "max-len": [1, 125],
+      "no-param-reassign": 0,
+      "no-use-before-define": 0,
+      "no-var": 0,
+      "object-shorthand": 0,
+      "one-var": [2, { "uninitialized": "always" }],
+      "one-var-declaration-per-line": 0,
+      "prefer-arrow-callback": 0,
+      "prefer-rest-params": 0,
+      "prefer-template": 0
+    }
   }
 }
