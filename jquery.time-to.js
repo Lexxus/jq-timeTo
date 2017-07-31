@@ -430,6 +430,14 @@
                 tick.call(this, digit - 1);
             }
         }
+		else if (digit === data.iHour
+			// fix for hours when day changing
+			&& data.displayDays > 0
+			&& digit > 0
+			&& data.vals[digit - 1] === 2 && data.vals[digit] === 3) {
+			n = 0;
+			tick.call(this, digit - 1);
+		}
         $li.eq(0).html(n);
 
         if ($.support.transition) {
