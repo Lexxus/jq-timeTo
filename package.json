@@ -1,6 +1,6 @@
 {
   "name": "time-to",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Countdown timer and digital clock",
   "main": "jquery.time-to.js",
   "scripts": {
@@ -54,13 +54,24 @@
       "comma-dangle": 0,
       "func-names": 0,
       "global-require": 0,
-      "indent": [2, 4],
-      "max-len": [1, 125],
+      "indent": [
+        2,
+        4
+      ],
+      "max-len": [
+        1,
+        125
+      ],
       "no-param-reassign": 0,
       "no-use-before-define": 0,
       "no-var": 0,
       "object-shorthand": 0,
-      "one-var": [2, { "uninitialized": "always" }],
+      "one-var": [
+        2,
+        {
+          "uninitialized": "always"
+        }
+      ],
       "one-var-declaration-per-line": 0,
       "prefer-arrow-callback": 0,
       "prefer-rest-params": 0,

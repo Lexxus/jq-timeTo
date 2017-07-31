@@ -3,9 +3,9 @@
  * Show countdown timer or realtime clock
  *
  * @author Alexey Teterin <altmoc@gmail.com>
- * @version 1.2.0
+ * @version 1.2.1
  * @license MIT http://opensource.org/licenses/MIT
- * @date 2016-11-02
+ * @date 2017-07-31
  */
 
 (function (factory) {
@@ -418,7 +418,6 @@
                 // fix for hours when day changing
                 if (digit === data.iHour
                         && data.displayDays > 0
-                        && digit > 0
                         && data.vals[digit - 1] === 0) {
                     n = 3;
                 }
@@ -430,11 +429,11 @@
                 tick.call(this, digit - 1);
             }
         }
-		else if (digit === data.iHour
-			// fix for hours when day changing
-			&& data.displayDays > 0
-			&& digit > 0
-			&& data.vals[digit - 1] === 2 && data.vals[digit] === 3) {
+		// fix for hours when day changing in clock mode
+		else if (!data.countdown
+				&& digit === data.iHour
+				&& data.displayDays > 0
+				&& data.vals[digit - 1] === 2 && data.vals[digit] === 3) {
 			n = 0;
 			tick.call(this, digit - 1);
 		}
