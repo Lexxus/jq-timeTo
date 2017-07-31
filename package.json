@@ -1,6 +1,6 @@
 {
   "name": "time-to",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Countdown timer and digital clock",
   "main": "jquery.time-to.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "gulp-uglify": "^1.5.1"
   },
   "dependencies": {
-    "jquery": "^2.1.4"
+    "jquery": "^2.2.4"
   },
   "eslintConfig": {
     "env": {

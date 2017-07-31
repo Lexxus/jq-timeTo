@@ -22,7 +22,7 @@ $('#countdown').timeTo(100, function(){ alert('Countdown finished'); });
 $('#countdown').timeTo({ seconds: 100, displayHours: false });
 ```
 
-#### Set delay to specyfied datetime
+#### Set delay to specified datetime
 
 ```javascript
 $('#countdown').timeTo(new Date('Dec 10 2013 00:00:00 GMT+0200 (EET)'));
@@ -58,6 +58,8 @@ Object with initial settings:
 
 * **callback**:   *function* that call when countdown end, default **null**;
 * **captionSize**: *integer* font-size by pixels for captions, if 0 then calculate automaticaly, default **0**;
+* **step**: *function* that is called every {stepCount} ticks, default **null**
+* **stepCount**: *integer* execute {step} every {stepCount} ticks, default **1**
 * **countdown**:  *boolean* if false then it's as clock, default **true**;
 * **countdownAlertLimit**: *integer* seconds left to countdown end after that clock apply CSS class *timeTo-alert*, default **10**;
 * **displayDays**: *integer* count of digits days to display, default **auto** (for backward compatibility *true* means *3*);
