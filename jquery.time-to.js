@@ -410,10 +410,10 @@
         $li.eq(1).html(n);
         n += step;
 
-        if (typeof this.data('step') === 'function') {
-            if (this.data('tickCount') % this.data('stepCount') === 0) {
-                this.data('step')();
-            }
+
+        if (typeof data.step === 'function' && data.tickCount % data.stepCount === 0) { // simplified if-block
+            this.data('tickCount', 0); // prevent number overload
+            data.step();
         }
 
         if (digit === data.iSec) {
