@@ -382,7 +382,7 @@
         var me = this;
         var $digits = this.find('ul');
         var data = this.data();
-        var tc, n, $ul, $li, step, tickTimeout, timeDiff;
+        var n, $ul, $li, step, tickTimeout, timeDiff;
 
         if (!data.vals || $digits.length === 0) {
             if (data.intervalId) {
@@ -398,9 +398,8 @@
             digit = data.iSec;
         }
 
-        tc = data.tickCount + 1;
 
-        this.data('tickCount', tc);
+        this.data('tickCount', data.tickCount + 1);
 
         n = data.vals[digit];
         $ul = $digits.eq(digit);
