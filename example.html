@@ -45,13 +45,13 @@ $('#countdown').timeTo({
     <div id="countdown-11"></div>
 
 
-    <h3>Set delay to specyfied datetime</h3>
+    <h3>Set delay to specified datetime</h3>
     <pre>
 $('#countdown').timeTo(new Date('<span id="date-str"></span>')); </pre>
 
     <div id="countdown-2"></div>
 
-    <h3>Set captions and dark theme</h1>
+    <h3>Set captions and dark theme</h3>
     <pre>
 $('#countdown').timeTo({
     timeTo: new Date(new Date('<span id="date2-str"></span>')),
@@ -70,6 +70,30 @@ $('#countdown').timeTo({
 $('#clock-1').timeTo();</pre>
 
     <div id="clock-1"></div>
+
+        <p>&nbsp;</p>
+    <h2>Digital clock with Step Setting and Step Callback</h2>
+    <pre>
+    $('#clock-w-step-cb').timeTo(
+        {
+            step: function() {
+                console.log('Executing every 3 ticks');
+            },
+            stepCount: 3
+        }
+    );
+    </pre>
+
+    <div id="clock-w-step-cb"></div>
+
+
+
+
+
+
+
+
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="node_modules/jquery/dist/jquery.min.js"><\/script>')</script>
@@ -92,6 +116,15 @@ $('#clock-1').timeTo();</pre>
             seconds: 100,
             displayHours: false
         });
+
+        $('#clock-w-step-cb').timeTo(
+            {
+                step: function() {
+                    console.log('Executing every 3 ticks');
+                },
+                stepCount: 3
+            }
+        );
 
         var date = getRelativeDate(20);
 

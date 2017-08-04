@@ -1,4 +1,4 @@
-/**
+ /**
  * Time-To jQuery plug-in
  * Show countdown timer or realtime clock
  *
@@ -25,6 +25,8 @@
 
     var defaults = {
         callback: null,          // callback function for exec when timer out
+        step: null,              // callback function to exec every {stepCount} ticks
+        stepCount: 1,            // number of ticks to increment before executing stepCount
         captionSize: 0,          // font-size by pixels for captions, if 0 then calculate automaticaly
         countdown: true,         // is countdown or real clock
         countdownAlertLimit: 10, // limit in seconds when display red background
@@ -47,7 +49,8 @@
         iSec: 8,                 // private, index of second digit
         iHour: 4,                // private, index of hour digit
         tickTimeout: 1000,       // timeout betweet each timer tick in miliseconds
-        intervalId: null         // private
+        intervalId: null,        // private
+        tickCount: 0             // private
     };
 
     var methods = {
@@ -342,6 +345,7 @@
             clearTimeout(data.intervalId);
         }
 
+
         days = Math.floor(sec / SECONDS_PER_DAY);
         rest = days * SECONDS_PER_DAY;
         hours = Math.floor((sec - rest) / SECONDS_PER_HOUR);
@@ -356,6 +360,7 @@
         str = (days < 100 ? '0' + (days < 10 ? '0' : '') : '')
             + days + (hours < 10 ? '0' : '') + hours + (minutes < 10 ? '0' : '')
             + minutes + (secs < 10 ? '0' : '') + secs;
+
 
         for (i = data.vals.length - 1, j = str.length - 1; i >= 0; i -= 1, j -= 1) {
             val = parseInt(str.substr(j, 1), 10);
@@ -393,6 +398,9 @@
             digit = data.iSec;
         }
 
+
+        this.data('tickCount', data.tickCount + 1);
+
         n = data.vals[digit];
         $ul = $digits.eq(digit);
         $li = $ul.children();
@@ -400,6 +408,12 @@
 
         $li.eq(1).html(n);
         n += step;
+
+
+        if (typeof data.step === 'function' && data.tickCount % data.stepCount === 0) { // simplified if-block
+            this.data('tickCount', 0); // prevent number overload
+            data.step();
+        }
 
         if (digit === data.iSec) {
             tickTimeout = data.tickTimeout;
@@ -417,8 +431,8 @@
                 n = data.limits[digit];
                 // fix for hours when day changing
                 if (digit === data.iHour
-                        && data.displayDays > 0
-                        && data.vals[digit - 1] === 0) {
+                    && data.displayDays > 0
+                    && data.vals[digit - 1] === 0) {
                     n = 3;
                 }
             } else {
@@ -428,15 +442,13 @@
             if (digit > 0) {
                 tick.call(this, digit - 1);
             }
+        } else if (!data.countdown // fix for hours when day changing in clock mode
+            && digit === data.iHour
+            && data.displayDays > 0
+            && data.vals[digit - 1] === 2 && data.vals[digit] === 3) {
+            n = 0;
+            tick.call(this, digit - 1);
         }
-		// fix for hours when day changing in clock mode
-		else if (!data.countdown
-				&& digit === data.iHour
-				&& data.displayDays > 0
-				&& data.vals[digit - 1] === 2 && data.vals[digit] === 3) {
-			n = 0;
-			tick.call(this, digit - 1);
-		}
         $li.eq(0).html(n);
 
         if ($.support.transition) {
