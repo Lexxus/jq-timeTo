@@ -1,6 +1,6 @@
 {
   "name": "time-to",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Countdown timer and digital clock",
   "main": "jquery.time-to.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "timer",
     "clock"
   ],
-  "author": "Alexey Teterin",
+  "author": "Oleksii Teterin",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Lexxus/jq-timeTo/issues"
@@ -33,8 +33,8 @@
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^1.5.1"
   },
-  "dependencies": {
-    "jquery": "^2.2.4"
+  "peerDependencies": {
+    "jquery": "^3.3.1"
   },
   "eslintConfig": {
     "env": {

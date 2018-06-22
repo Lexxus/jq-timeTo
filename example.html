@@ -5,12 +5,12 @@
     <title>&laquo;TimeTo&raquo; jQuery plug-in example</title>
 
     <!--[if lt IE 9]>
-	<script>
-		document.createElement('figure');
-		document.createElement('figcaption');
-	</script>
-	<![endif]-->
-	<link href="timeTo.css" type="text/css" rel="stylesheet"/>
+    <script>
+        document.createElement('figure');
+        document.createElement('figcaption');
+    </script>
+    <![endif]-->
+    <link href="timeTo.css" type="text/css" rel="stylesheet"/>
 
     <style>
         pre {
@@ -59,7 +59,11 @@ $('#countdown').timeTo({
     theme: "black",
     displayCaptions: true,
     fontSize: 48,
-    captionSize: 14
+    captionSize: 14,
+    languages: {
+        pl: {days: 'dni', hours: 'godziny', min: 'minuty', sec: 'secundy'}
+    },
+    lang: 'pl'
 }); </pre>
 
     <div id="countdown-3"></div>
@@ -95,7 +99,7 @@ $('#clock-1').timeTo();</pre>
 
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="node_modules/jquery/dist/jquery.min.js"><\/script>')</script>
     <script src="jquery.time-to.js"></script>
     <script>
@@ -143,12 +147,16 @@ $('#clock-1').timeTo();</pre>
          */
         $('#countdown-3').timeTo({
             time: new Date('2017-07-30T23:59:45'),
-			countdown: false,
+            countdown: false,
             displayDays: 2,
             theme: "black",
             displayCaptions: true,
             fontSize: 48,
-            captionSize: 14
+            captionSize: 14,
+			languages: {
+				pl: {days: 'dni', hours: 'godziny', min: 'minuty', sec: 'secundy'}
+			},
+			lang: 'pl'
         });
 
         /**

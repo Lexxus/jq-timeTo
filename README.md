@@ -6,6 +6,12 @@ jQuery plugin - timer countdown digital clock
 ## Demo
 http://lexxus.github.io/jq-timeTo/
 
+## Install
+
+```
+npm install time-to
+```
+
 ## Examples
 
 ### Countdown timer
@@ -67,7 +73,7 @@ Object with initial settings:
 * **displayHours**: *boolean* if false then hide hours, default **true**;
 * **fontFamily**: *string* font-family for digits, default **'Verdana, sans-serif'**;
 * **fontSize**: *integer* font-size by pixels for digits, default **0** - use CSS instead;
-* **lang**: *string* language for caption, available 'en', 'ru', 'ua', 'de', 'fr', 'sp', 'it', 'nl', 'no', 'pt', default **'en'**;
+* **lang**: *string* language for caption, available 'en', 'ru', 'ua', 'de', 'fr', 'sp', 'it', 'nl', 'no', 'pt', 'pl', default **'en'**;
 * **languages**: *object* extra languages or overrides, first level key is lang, second level keys: 'days', 'hours', 'min', 'sec', default **{}**;
 * **seconds**: *integer* initial time in seconds for countdown timer, default **0**;
 * **start**: *boolean* if true - start timer automaticaly, else need execute .timeTo("start"), default **true**;

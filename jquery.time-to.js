@@ -2,10 +2,10 @@
  * Time-To jQuery plug-in
  * Show countdown timer or realtime clock
  *
- * @author Alexey Teterin <altmoc@gmail.com>
- * @version 1.2.1
+ * @author Oleksii Teterin <altmoc@gmail.com>
+ * @version 1.2.3
  * @license MIT http://opensource.org/licenses/MIT
- * @date 2017-07-31
+ * @date 2018-06-22
  */
 
 (function (factory) {
@@ -101,7 +101,8 @@
         nl: { days: 'dagen',  hours: 'uren',   min: 'minuten',  sec: 'seconden' },
         no: { days: 'dager',  hours: 'timer',  min: 'minutter', sec: 'sekunder' },
         pt: { days: 'dias',   hours: 'horas',  min: 'minutos',  sec: 'segundos' },
-        tr: { days: 'gün',    hours: 'saat',   min: 'dakika',   sec: 'saniye' }
+        tr: { days: 'gün',    hours: 'saat',   min: 'dakika',   sec: 'saniye' },
+        pl: { days: 'dni', hours: 'godziny', min: 'minuty', sec: 'secundy' }
     };
 
     /* eslint-enable no-multi-spaces */
