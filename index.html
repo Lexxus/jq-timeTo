@@ -153,13 +153,10 @@
       </footer>
     </div>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery-1.9.1.min.js"><\/script>')</script>
-    <script src="js/jquery.timeTo.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/jquery.time-to.js"></script>
     <script>
-        /***
-* Set timer countdown in seconds with callback
-*/
+        /* Set timer countdown in seconds with callback */
         $('#countdown-1').timeTo(100, function(){
             alert('Coubtdown finished');
         });
@@ -168,17 +165,13 @@
 
         document.getElementById('date-str').innerHTML = date.toString();
 
-        /**
-* Set timer countdown to specyfied date
-*/
+        /* Set timer countdown to specyfied date */
         $('#countdown-2').timeTo(date);
 
         date = getRelativeDate(7, 9);
         document.getElementById('date2-str').innerHTML = date.toString();
 
-        /**
-* Set theme and captions
-*/
+        /* Set theme and captions */
         $('#countdown-3').timeTo({
             timeTo: date,
             displayDays: 2,
@@ -188,13 +181,11 @@
             captionSize: 14
         });
 
-        /**
-* Simple digital clock
-*/
+        /* Simple digital clock */
         $('#clock-1').timeTo();
 
         function getRelativeDate(days, hours, minutes){
-            var date = new Date(Date.now() + 60000 /* milisec */ * 60 /* minutes */ * 24 /* hours */ * days /* days */);
+            var date = new Date().setTime(Date.now() + 60000 /* milisec */ * 60 /* minutes */ * 24 /* hours */ * days /* days */);
 
             date.setHours(hours || 0);
             date.setMinutes(minutes || 0);
