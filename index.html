@@ -184,8 +184,8 @@
         /* Simple digital clock */
         $('#clock-1').timeTo();
 
-        function getRelativeDate(days, hours, minutes){
-            var date = new Date().setTime(Date.now() + 60000 /* milisec */ * 60 /* minutes */ * 24 /* hours */ * days /* days */);
+        function getRelativeDate(days, hours, minutes) {
+            var date = new Date(Date.now() + 60000 /* milisec */ * 60 /* minutes */ * 24 /* hours */ * days /* days */);
 
             date.setHours(hours || 0);
             date.setMinutes(minutes || 0);
