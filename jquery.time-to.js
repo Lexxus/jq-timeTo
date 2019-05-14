@@ -1,11 +1,12 @@
- /**
+/**
  * Time-To jQuery plug-in
  * Show countdown timer or realtime clock
  *
  * @author Oleksii Teterin <altmoc@gmail.com>
- * @version 1.2.3
+ * @version 1.3.0
  * @license MIT http://opensource.org/licenses/MIT
- * @date 2018-06-22
+ * @date 2019-05-14
+ * @host https://github.com/Lexxus/jq-timeTo
  */
 
 (function (factory) {
@@ -14,6 +15,7 @@
         define(['jquery'], factory);
     } else if (typeof exports === 'object') {
         // CommonJS (Node)
+        /* eslint-disable import/no-unresolved */
         module.exports = factory(require('jquery'));
     } else {
         // globals
@@ -23,6 +25,7 @@
     var SECONDS_PER_DAY = 86400;
     var SECONDS_PER_HOUR = 3600;
 
+    /* eslint-disable no-multi-spaces */
     var defaults = {
         callback: null,          // callback function for exec when timer out
         step: null,              // callback function to exec every {stepCount} ticks
@@ -88,14 +91,13 @@
         }
     };
 
-    /* eslint-disable no-multi-spaces */
-
     var dictionary = {
         en: { days: 'days',   hours: 'hours',  min: 'minutes',  sec: 'seconds' },
         ru: { days: 'дней',   hours: 'часов',  min: 'минут',    sec: 'секунд' },
         ua: { days: 'днiв',   hours: 'годин',  min: 'хвилин',   sec: 'секунд' },
         de: { days: 'Tag',    hours: 'Uhr',    min: 'Minuten',  sec: 'Secunden' },
         fr: { days: 'jours',  hours: 'heures', min: 'minutes',  sec: 'secondes' },
+        es: { days: 'días',   hours: 'horas',  min: 'minutos',  sec: 'segundos' },
         sp: { days: 'días',   hours: 'horas',  min: 'minutos',  sec: 'segundos' },
         it: { days: 'giorni', hours: 'ore',    min: 'minuti',   sec: 'secondi' },
         nl: { days: 'dagen',  hours: 'uren',   min: 'minuten',  sec: 'seconden' },
@@ -123,7 +125,7 @@
 
     $.fn.timeTo = function () {
         var options = {};
-        var now = $.now();
+        var now = Date.now();
         var j, arg, num, method, time, days, tt, sec, m, t;
 
         for (j = 0; j < arguments.length; j += 1) {
@@ -168,11 +170,12 @@
             time = options.time;
 
             if (!time) {
-                time = new Date();
+                time = new Date(now);
             }
 
             if (typeof time === 'object' && time.getTime) {
-                options.seconds = (time.getHours() * SECONDS_PER_HOUR) + (time.getMinutes() * 60) + time.getSeconds();
+                options.seconds = (time.getDate() * SECONDS_PER_DAY) + (time.getHours() * SECONDS_PER_HOUR) +
+                  (time.getMinutes() * 60) + time.getSeconds();
                 options.countdown = false;
             } else if (typeof time === 'string') {
                 tt = time.split(':');
@@ -264,9 +267,9 @@
 
                 thtml = (data.displayCaptions
                     ? (data.displayHours
-                            ? '<figure style="max-width:' + maxWidth + 'px">$1<figcaption' + fsStyle + '>'
-                                + language.hours + '</figcaption></figure>' + dot2
-                            : '')
+                        ? '<figure style="max-width:' + maxWidth + 'px">$1<figcaption' + fsStyle + '>'
+                            + language.hours + '</figcaption></figure>' + dot2
+                        : '')
                         + '<figure style="max-width:' + maxWidth + 'px">$1<figcaption' + fsStyle + '>' + language.min
                         + '</figcaption></figure>' + dot2
                         + '<figure style="max-width:' + maxWidth + 'px">$1<figcaption' + fsStyle + '>' + language.sec
@@ -275,21 +278,25 @@
                 ).replace(/\$1/g, dhtml1 + dhtml2);
 
                 if (data.displayDays > 0) {
-                    marginRight = data.fontSize * 0.4 || defaults.gap;
+                    marginRight = Math.round(data.fontSize * 0.4 || defaults.gap);
                     dhtml = dhtml1;
 
                     for (i = data.displayDays - 1; i > 0; i -= 1) {
                         dhtml += i === 1
-                            ? dhtml2.replace('">', 'margin-right:' + Math.round(marginRight) + 'px">')
+                            ? dhtml2.replace('">', 'margin-right:' + marginRight + 'px">')
                             : dhtml2;
                     }
+
+                    if (data.displayDays === 1) {
+                        dhtml = dhtml.replace('">', 'margin-right:' + marginRight + 'px">');
+                    }
+
                     thtml = (data.displayCaptions
-                        ? '<figure style="width:' + Math.round((data.width * data.displayDays) + marginRight + 4) + 'px">$1'
-                            + '<figcaption style="' + fsStyleVal + 'padding-right:' + Math.round(marginRight) + 'px">'
+                        ? '<figure style="width:' + ((data.width * data.displayDays) + marginRight + 4) + 'px">$1'
+                            + '<figcaption style="' + fsStyleVal + 'padding-right:' + marginRight + 'px">'
                             + language.days + '</figcaption></figure>'
-                        : '$1').replace(
-                            /\$1/, dhtml
-                        ) + thtml;
+                        : '$1')
+                        .replace(/\$1/, dhtml) + thtml;
                 }
                 $this.html(thtml);
             } else if (method !== 'reset') {
@@ -369,7 +376,7 @@
             $digits.eq(i).children().html(val);
         }
         if (isInterval || force) {
-            data.ttStartTime = $.now();
+            data.ttStartTime = Date.now();
             data.intervalId = setTimeout(tick.bind(this), 1000);
             this.data('intervalId', data.intervalId);
         }
@@ -418,7 +425,7 @@
 
         if (digit === data.iSec) {
             tickTimeout = data.tickTimeout;
-            timeDiff = $.now() - data.ttStartTime;
+            timeDiff = Date.now() - data.ttStartTime;
 
             data.sec += step;
 

@@ -78,6 +78,7 @@ Object with initial settings:
 * **seconds**: *integer* initial time in seconds for countdown timer, default **0**;
 * **start**: *boolean* if true - start timer automaticaly, else need execute .timeTo("start"), default **true**;
 * **theme**: *string* nameof color theme, available "white" and "black", default **'white'**;
+* **time**: *string* time in format 'H:mm:ss' to set the clock, **countdown** option automaticaly has to be set to **false**;
 * **timeTo**: *date object* specify date and time for current time or for countdown to, default **null**.
 
 ### Integer

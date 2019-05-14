@@ -25,12 +25,12 @@
 
     <h2>Countdown timer</h2>
 
-    <h3>Set delay in seconds</h3>
+    <h3>Set countdown in seconds with callback</h3>
     <pre>
-$('#countdown').timeTo(120, function(){ alert('Countdown finished'); }); </pre>
+$('#countdown').timeTo(120, function() { alert('Countdown finished'); }); </pre>
 
     <div id="countdown-1"></div>
-    <p><button id="reset-1" type="button">Reset</button></p>
+    <p><button id="reset-1" type="button">Reset this timer</button></p>
 
     <div class="clock"></div>
     <div class="clock"></div>
@@ -44,8 +44,7 @@ $('#countdown').timeTo({
 
     <div id="countdown-11"></div>
 
-
-    <h3>Set delay to specified datetime</h3>
+    <h3>Set countdown to specified date-time</h3>
     <pre>
 $('#countdown').timeTo(new Date('<span id="date-str"></span>')); </pre>
 
@@ -54,21 +53,18 @@ $('#countdown').timeTo(new Date('<span id="date-str"></span>')); </pre>
     <h3>Set captions and dark theme</h3>
     <pre>
 $('#countdown').timeTo({
-    timeTo: new Date(new Date('<span id="date2-str"></span>')),
+    time: '<span id="date2-str"></span>',
     displayDays: 2,
     theme: "black",
     displayCaptions: true,
     fontSize: 48,
     captionSize: 14,
-    languages: {
-        pl: {days: 'dni', hours: 'godziny', min: 'minuty', sec: 'secundy'}
-    },
-    lang: 'pl'
+    lang: 'es'
 }); </pre>
 
     <div id="countdown-3"></div>
 
-    <p>&nbsp;</p>
+    <br/><br/>
     <h2>Digital clock</h2>
     <pre>
 $('#clock-1').timeTo();</pre>
@@ -121,42 +117,36 @@ $('#clock-1').timeTo();</pre>
             displayHours: false
         });
 
-        $('#clock-w-step-cb').timeTo(
-            {
-                step: function() {
-                    console.log('Executing every 3 ticks');
-                },
-                stepCount: 3
-            }
-        );
+        $('#clock-w-step-cb').timeTo({
+          step: function() {
+              console.log('Executing every 3 ticks');
+          },
+          stepCount: 3
+        });
 
-        var date = getRelativeDate(20);
+        var date = getRelativeDate(2);
 
-        document.getElementById('date-str').innerHTML = date.toString();
+        document.getElementById('date-str').innerHTML = date.toISOString();
 
         /**
          * Set timer countdown to specyfied date
          */
         $('#countdown-2').timeTo(date);
 
-        date = getRelativeDate(7, 9);
-        document.getElementById('date2-str').innerHTML = date.toString();
+        var time = '23:59:54';
+        document.getElementById('date2-str').innerHTML = time;
 
         /**
          * Set theme and captions
          */
         $('#countdown-3').timeTo({
-            time: new Date('2017-07-30T23:59:45'),
-            countdown: false,
+            time: time,
             displayDays: 2,
             theme: "black",
             displayCaptions: true,
             fontSize: 48,
             captionSize: 14,
-			languages: {
-				pl: {days: 'dni', hours: 'godziny', min: 'minuty', sec: 'secundy'}
-			},
-			lang: 'pl'
+            lang: 'es'
         });
 
         /**
@@ -164,14 +154,14 @@ $('#clock-1').timeTo();</pre>
          */
         $('#clock-1').timeTo();
 
-        function getRelativeDate(days, hours, minutes){
-            var date = new Date((new Date()).getTime() + 60000 /* milisec */ * 60 /* minutes */ * 24 /* hours */ * days /* days */);
+        function getRelativeDate(days, hours, minutes) {
+            var d = new Date(Date.now() + 60000 /* milisec */ * 60 /* minutes */ * 24 /* hours */ * days /* days */);
 
-            date.setHours(hours || 0);
-            date.setMinutes(minutes || 0);
-            date.setSeconds(0);
+            d.setHours(hours || 0);
+            d.setMinutes(minutes || 0);
+            d.setSeconds(0);
 
-            return date;
+            return d;
         }
     </script>
 </body>
