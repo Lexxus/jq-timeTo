@@ -104,7 +104,7 @@
         no: { days: 'dager',  hours: 'timer',  min: 'minutter', sec: 'sekunder' },
         pt: { days: 'dias',   hours: 'horas',  min: 'minutos',  sec: 'segundos' },
         tr: { days: 'gün',    hours: 'saat',   min: 'dakika',   sec: 'saniye' },
-        pl: { days: 'dni', hours: 'godziny', min: 'minuty', sec: 'secundy' }
+        pl: { days: 'dni', hours: 'godziny', min: 'minuty', sec: 'sekundy' }
     };
 
     /* eslint-enable no-multi-spaces */
