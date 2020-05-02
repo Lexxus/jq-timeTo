@@ -43,19 +43,21 @@
 
 <h4>Set delay in seconds</h4>
 
+<div id="countdown-1"></div>
+
 <div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#countdown'</span><span class="p">).</span><span class="nx">timeTo</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">'Countdown finished'</span><span class="p">);</span> <span class="p">});</span>
 </pre></div>
 
-<div id="countdown-1"></div>
-
 <h4>Set delay to specyfied datetime</h4>
+
+<div id="countdown-2"></div>
 
 <div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#countdown'</span><span class="p">).</span><span class="nx">timeTo</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="s1">'<span id="date-str">Dec 10 2013 00:00:00 GMT+0200 (EET)</span>'</span><span class="p">));</span>
 </pre></div>
 
-<div id="countdown-2"></div>
-
 <h4>Set captions and dark theme</h4>
+
+<div id="countdown-3"></div>
 
 <div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#countdown'</span><span class="p">).</span><span class="nx">timeTo</span><span class="p">({</span>
     <span class="nx">timeTo</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="s1">'<span id="date2-str">Dec 10 2013 00:00:00 GMT+0200 (EET)</span>'</span><span class="p">)),</span>
@@ -67,9 +69,33 @@
 <span class="p">});</span>
 </pre></div>
 
-<div id="countdown-3"></div>
+<h4>Controlled by an event</h4>
 
-<p>&nbsp;</p>
+<div>
+  <button id="action"></button>
+</div>
+<div id="countdown-4"></div>
+
+<div class="highlight"><pre>
+  <span class="k">var</span> $countdown <span class="p">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#countdown'</span><span class="p">);</span>
+  <span class="k">var</span> $button <span class="p">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'button'</span><span class="p">);</span>
+  <span class="k">var</span> timeout <span class="p">=</span> <span class="kc">5e3</span><span class="p">;</span>
+
+  $countdown.timeTo(<span class="k">new</span> <span class="nb">Date</span>(<span class="nb">Date</span><span class="p">.</span>now() <span class="p">+</span> timeout)<span class="p">,</span>
+    <span class="k">function</span>() {
+      $countdown.hide();
+      $button.prop(<span class="s1">'disabled'</span><span class="p">,</span> <span class="kc">false</span>).text(<span class="s1">'Start'</span>);
+    }
+  );
+
+  $action.click(<span class="k">function</span>() {
+    $button.prop(<span class="s1">'disabled'</span><span class="p">,</span> <span class="kc">true</span>).text(<span class="s1">'processing...'</span>);
+    $countdown.show().timeTo(<span class="k">new</span> <span class="nb">Date</span>(<span class="nb">Date</span><span class="p">.</span>now() + timeout));
+  });
+
+  $button.prop(<span class="s1">'disabled'</span><span class="p">,</span> <span class="kc">true</span>).text(<span class="s1">'processing...'</span>);
+</pre></div>
+
 <h3>Digital clock</h3>
 
 <div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#clock-1'</span><span class="p">).</span><span class="nx">timeTo</span><span class="p">();</span>
@@ -86,7 +112,7 @@
 
 <p>where <strong>options</strong> can be...</p>
 
-<h3>Object</h3>
+<h3>Options</h3>
 
 <p>Object with initial settings:</p>
 
@@ -153,7 +179,7 @@
       </footer>
     </div>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/jquery.time-to.js"></script>
     <script>
         /* Set timer countdown in seconds with callback */
@@ -181,6 +207,30 @@
             captionSize: 14
         });
 
+        var $countdown4 = $('#countdown-4');
+        var $action = $('#action');
+        var timeout = 5e3;
+
+        $countdown4.timeTo(new Date(Date.now() + timeout),
+          function() {
+            $countdown4.hide();
+            $action.prop('disabled', false).text('Submit');
+          }
+        );
+
+        $action.click(() => {
+          $action.prop('disabled', true).text('processing...');
+
+          // ajax request
+          setTimeout(ajaxResponse, 100);
+        });
+
+        $action.prop('disabled', true).text('processing...');
+
+        function ajaxResponse()  {
+          $countdown4.show().timeTo(new Date(Date.now() + timeout));
+        }
+
         /* Simple digital clock */
         $('#clock-1').timeTo();
 
@@ -193,7 +243,7 @@
 
             return date;
         }
-    </script>   
+    </script>
 
   </body>
 </html>

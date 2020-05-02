@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="TimeTo - jQuery Plugin : jQuery plugin - timer countdown digital clock" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/timeTo.css">
+
+    <title>TimeTo - jQuery Plugin</title>
+
+    <style type="text/css">
+      #countdown {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Lexxus/jq-timeTo">View on GitHub</a>
+
+          <h1 id="project_title">TimeTo - jQuery Plugin</h1>
+          <h2 id="project_tagline">jQuery plugin - timer countdown digital clock</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Lexxus/jq-timeTo/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Lexxus/jq-timeTo/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>TimeTo</h1>
+
+<p>jQuery plugin - timer countdown digital clock</p>
+
+<h2>Examples</h2>
+
+<div>
+  <button id="action"></button>
+</div>
+<div id="countdown"></div>
+      </section>
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+<script src="js/jquery.time-to.js"></script>
+
+<script>
+const $countdown = $('#countdown');
+const $action = $('#action');
+const timeout = 5e3;
+
+$countdown.timeTo({
+  timeTo: new Date(Date.now() + timeout),
+  displayDays: 2,
+  theme: 'black',
+  displayCaptions: true,
+  fontSize: 24,
+  captionSize: 12,
+  lang: 'tr',
+  callback: function () {
+    $countdown.hide();
+    $action.prop('disabled', false).text('Submit');
+  }
+});
+
+$action.click(() => {
+  $action.prop('disabled', true).text('processing...');
+
+  // ajax request
+  setTimeout(ajaxResponse, 100);
+});
+
+$action.prop('disabled', true).text('processing...');
+
+function ajaxResponse()  {
+  $countdown.show().timeTo(new Date(Date.now() + timeout));
+}
+</script>
+  </body>
+</html>
