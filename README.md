@@ -1,5 +1,11 @@
-TimeTo
+#TimeTo
 =========
+
+*Note*: This package is deprecated and developing is stoped. Use [fancy-timer](https://github.com/Lexxus/fancy-timer) instead.
+
+```
+npm i fancy-timer
+```
 
 jQuery plugin - timer countdown digital clock
 

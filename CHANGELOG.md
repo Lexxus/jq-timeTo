@@ -1,3 +1,7 @@
+## 1.3.1
+
+- This package is deprecated in favor of 'fancy-timer'.
+
 # 1.3.0
 
 - Removed Gulp.
